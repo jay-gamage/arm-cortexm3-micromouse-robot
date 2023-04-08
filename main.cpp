@@ -1,14 +1,14 @@
 //-----------------------------------------------------------------------------//                    
-//    MICROMOUSE - 5ELEN004W – ROBOTIC SYSTEMS PROJECT - MATRIXBOT - 2019      //
+//                       MICROMOUSE - MATRIXBOT - 2022                         //
 //-----------------------------------------------------------------------------//
 
-//                Filename:         Final_Micromouse_Demonstration_v4.cpp
-//                Code version:     2.6                  
-//                Last modified:    29/04/19 - 04.32am 
+//                Source file:      main_v4.cpp
+//                Code version:     v4.6                  
+//                Revision date:    29/04/22 - 04.32am 
 //                Programmer:       Janitha Gamage
-//                Contact:          jgamage94@gmail.com
+//                Contact:          djg.gamage@gmail.com
 
-// This project contains the final code of a micromouse (maze solving robot) using the NXP LPC1768 microcontroller (based on an Arm Cortex-M3).
+// This project contains the final code of a micromouse (maze solving robot) using the NXP LPC1768 Mbed board (based on an Arm Cortex-M3).
 // The micromouse is an integrated system comprising of a range of components including sensors for input, a microcontroller board for processing
 // and motors, LEDs and a LCD for output. 
 
@@ -19,12 +19,12 @@
 #include "TextLCDScroll.h"
 #include "ultrasonic.h"
 
-#include "preprocessor_directives.h"
+#include "config.h"
 #include "pin_description.h"
 
 // Use a union struct to store mapped maze data
 union {
-	unsigned char all;                               // Map access size is 1 byte
+	unsigned char all;                            // Map access size is 1 byte
 	struct {
 		unsigned char north : 1;                  // 1 bit for North wall
 		unsigned char east : 1;                   // 1 bit for East wall  
@@ -105,9 +105,9 @@ int main() {
 	// Display text on LCD
 	lcd.cls();                                                              // Clears LCD screen
 	lcd.setSpeed(9);                                                        // Sets text scrolling speed
-	lcd.setLine(0, ">>MatrixBot_v1<<");                                     // Prints text on first line
-	lcd.setLine(1, "Micromouse based on Mbed LPC1768 | Arm Cortex-M3");     // Prints text on second line   
-	wait(6);                                                                // 6s delay until all scrolling text is displayed
+	lcd.setLine(0, ">>MatrixBot<<");                                     	// Prints text on first line
+	lcd.setLine(1, "Micromouse based on Mbed NXP LPC1768 | Arm Cortex-M3"); // Prints text on second line   
+	wait(7);                                                                // 7s delay until all scrolling text is displayed
 	lcd.cls();
 	lcd.setLine(1, "MOVING FORWARD");
 
@@ -328,7 +328,7 @@ void slowStartMotors() {                                 // Turn motors for 100 
 //-----------------------------------------------------------------------------//
 //                   MOVES MOUSE 1 SQUARE FORWARD IN MAZE                      //
 //-----------------------------------------------------------------------------//
-void run1Square() {                                                  // Turn motors for 600 steps                                                          
+void run1Square() {                                                 // Turn motors for 600 steps                                                          
 	lcd.setLine(1, "RUN 1 SQUARE");                                 // Print text on LCD
 	slowStartMotors();                                              // Start motors slowly
 	rightMotorSpeed = leftMotorSpeed = HIGH;                        // Set motor speeds to high 
@@ -342,7 +342,7 @@ void run1Square() {                                                  // Turn mot
 //-----------------------------------------------------------------------------//
 //                      PERFORMS 90 DEGREE RIGHT TURN                          //
 //-----------------------------------------------------------------------------//
-void turnRight90() {                                     // Turn motors in opposite directions for 220 steps
+void turnRight90() {                                    // Turn motors in opposite directions for 220 steps
 	lcd.setLine(1, "TURN RIGHT");                       // Print text on LCD
 	rightMotorSpeed = leftMotorSpeed = LOW;             // Set motor speeds to low   
 	rightMotorCountSteps = 0;                           // Set right motor step count to zero
@@ -357,7 +357,7 @@ void turnRight90() {                                     // Turn motors in oppos
 //-----------------------------------------------------------------------------//
 //                      PERFORMS 90 DEGREE LEFT TURN                           //
 //-----------------------------------------------------------------------------//
-void turnLeft90() {                                      // Turn motors in opposite directions for 220 steps
+void turnLeft90() {                                     // Turn motors in opposite directions for 220 steps
 	lcd.setLine(1, "TURN LEFT");                        // Print text on LCD
 	rightMotorSpeed = leftMotorSpeed = LOW;             // Set motor speeds to low 
 	leftMotorCountSteps = 0;                            // Set left motor step count to zero
@@ -372,7 +372,7 @@ void turnLeft90() {                                      // Turn motors in oppos
 //-----------------------------------------------------------------------------//
 //                        PERFORMS 180 DEGREE U-TURN                           //
 //-----------------------------------------------------------------------------//
-void turn180() {                                         // Turn motors in opposite directions for 440 steps
+void turn180() {                                        // Turn motors in opposite directions for 440 steps
 	lcd.setLine(1, "TURN 180");                         // Print text on LCD
 	rightMotorSpeed = leftMotorSpeed = LOW;             // Set motor speeds to low  
 	rightMotorCountSteps = 0;                           // Set left motor step count to zero
